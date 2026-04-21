@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priya Musale — ML Researcher & Data Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --blush:   #FADADD;
+      --sage:    #E2F0CB;
+      --yellow:  #FFF2CC;
+      --blue:    #DAE8FC;
+      --ink:     #2C2A2A;
+      --ink-soft:#5A5555;
+      --white:   #FDFCFB;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); background: var(--white); color: var(--ink); overflow-x: hidden; }
+
+    /* CURSOR */
+    .cursor {
+      width: 12px; height: 12px; background: var(--blush); border-radius: 50%;
+      position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999;
+      transform: translate(-50%,-50%);
+      transition: width 0.3s, height 0.3s, background 0.3s;
+      mix-blend-mode: multiply;
+    }
+    .cursor.grow { width: 40px; height: 40px; background: var(--yellow); }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 3.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      backdrop-filter: blur(14px);
+      background: rgba(253,252,251,0.82);
+      border-bottom: 1px solid rgba(201,228,222,0.35);
+    }
+    .nav-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 400; color: var(--ink); text-decoration: none; letter-spacing: 0.02em; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a { text-decoration: none; font-size: 0.73rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); transition: color 0.2s; }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    #hero { min-height: 100vh; padding-top: 70px; display: grid; grid-template-columns: 1fr 1fr; }
+    .hero-left {
+      background: var(--blush);
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 5rem 4rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1.6rem;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.3s;
+    }
+    .hero-name {
+      font-family: var(--font-display);
+      font-size: clamp(3.8rem, 6vw, 6.5rem);
+      line-height: 0.95; font-weight: 300; color: var(--ink);
+      opacity: 0; animation: fadeUp 1s ease forwards 0.5s;
+    }
+    .hero-name em { font-style: italic; color: var(--ink-soft); }
+    .hero-tagline {
+      margin-top: 2rem; font-size: 1rem; line-height: 1.78;
+      color: var(--ink-soft); max-width: 380px; font-weight: 300;
+      opacity: 0; animation: fadeUp 1s ease forwards 0.75s;
+    }
+    .hero-cta-row {
+      margin-top: 2.5rem; display: flex; gap: 0.9rem; flex-wrap: wrap;
+      opacity: 0; animation: fadeUp 1s ease forwards 1s;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.7rem 1.5rem; border-radius: 100px;
+      font-size: 0.74rem; letter-spacing: 0.09em; text-transform: uppercase;
+      text-decoration: none; cursor: pointer; transition: all 0.22s;
+      border: 1.5px solid var(--ink); font-family: var(--font-body);
+    }
+    .btn-primary { background: var(--ink); color: var(--white); }
+    .btn-primary:hover { background: var(--ink-soft); transform: translateY(-2px); }
+    .btn-outline { color: var(--ink); background: transparent; }
+    .btn-outline:hover { background: var(--blue); transform: translateY(-2px); }
+
+    .hero-right { position: relative; overflow: hidden; min-height: 500px; }
+    .hero-photo { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .hero-right::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(250,218,221,0.15) 0%, transparent 35%);
+      pointer-events: none;
+    }
+
+    /* SECTION SHARED */
+    .section-wrap { max-width: 1280px; margin: 0 auto; padding: 7rem 4rem; }
+    .section-label { font-family: var(--font-mono); font-size: 0.67rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.7rem; }
+    .section-title { font-family: var(--font-display); font-size: clamp(2.4rem, 4vw, 3.6rem); font-weight: 300; line-height: 1.1; margin-bottom: 3rem; }
+    .section-title em { font-style: italic; color: var(--ink-soft); }
+
+    /* ABOUT */
+    #about { background: var(--white); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: start; }
+    .about-text { font-size: 1rem; line-height: 1.85; color: var(--ink-soft); font-weight: 300; }
+    .about-text p + p { margin-top: 1.2rem; }
+    .about-text strong { color: var(--ink); font-weight: 500; }
+
+    /* NEW SKILLS CLUSTER STYLES */
+    .about-skills-cluster { display: flex; flex-direction: column; gap: 1.5rem; }
+    .skill-category { display: flex; flex-direction: column; gap: 0.5rem; }
+    .skill-category-title { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.1em; color: var(--ink-soft); text-transform: uppercase; }
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .pill { 
+      padding: 0.4rem 1rem; 
+      border-radius: 100px; 
+      font-size: 0.8rem; 
+      color: var(--ink); 
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      cursor: default;
+      border: 1px solid rgba(44,42,42,0.1);
+    }
+    .pill.blush { background: rgba(250, 218, 221, 0.4); }
+    .pill.sage { background: rgba(226, 240, 203, 0.4); }
+    .pill.yellow { background: rgba(255, 242, 204, 0.4); }
+    .pill:hover { transform: translateY(-3px); border-color: var(--ink); background: var(--white); }
+
+    /* RESEARCH */
+    #research { background: var(--ink); }
+    .research-section-wrap { max-width: 1280px; margin: 0 auto; padding: 7rem 4rem; }
+    #research .section-label { color: rgba(253,252,251,0.4); }
+    #research .section-title { color: var(--white); }
+    #research .section-title em { color: var(--yellow); }
+    .research-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .research-card { border: 1px solid rgba(253,252,251,0.1); border-radius: 20px; padding: 2.2rem; transition: all 0.3s; cursor: default; }
+    .research-card:hover { border-color: rgba(253,252,251,0.25); background: rgba(253,252,251,0.04); transform: translateY(-4px); }
+    .rc-accent { width: 44px; height: 4px; border-radius: 2px; margin-bottom: 1.4rem; }
+    .rc-accent.blush { background: var(--blush); }
+    .rc-accent.sage  { background: var(--sage); }
+    .rc-accent.yellow  { background: var(--yellow); }
+    .rc-icon { font-size: 1.8rem; margin-bottom: 0.9rem; }
+    .rc-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.75rem; line-height: 1.2; color: var(--white); }
+    .rc-desc { font-size: 0.84rem; line-height: 1.75; color: rgba(253,252,251,0.58); font-weight: 300; }
+    .rc-tags { margin-top: 1.4rem; display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .rc-tag { padding: 0.28rem 0.7rem; border-radius: 100px; font-size: 0.62rem; letter-spacing: 0.08em; text-transform: uppercase; border: 1px solid rgba(253,252,251,0.15); color: rgba(253,252,251,0.55); }
+
+    /* EXPERIENCE */
+    #experience { background: var(--white); }
+    .exp-timeline { display: flex; flex-direction: column; }
+    .exp-item {
+      display: grid; grid-template-columns: 180px 1fr; gap: 3rem;
+      padding: 2.8rem 1rem; border-bottom: 1px solid rgba(44,42,42,0.09);
+      border-radius: 14px; transition: background 0.22s;
+    }
+    .exp-item:first-child { border-top: 1px solid rgba(44,42,42,0.09); }
+    .exp-item:hover { background: var(--blue); }
+    .exp-meta { color: var(--ink-soft); }
+    .exp-year { font-family: var(--font-display); font-size: 1rem; font-weight: 300; margin-bottom: 0.6rem; }
+    .exp-badge { display: inline-block; padding: 0.28rem 0.75rem; border-radius: 100px; font-size: 0.61rem; letter-spacing: 0.1em; text-transform: uppercase; font-weight: 500; }
+    .badge-uw         { background: var(--blush); color: var(--ink); }
+    .badge-nationwide { background: var(--sage); color: var(--ink); }
+    .badge-linkedin   { background: var(--yellow); color: var(--ink); }
+    .badge-jpmorgan   { background: var(--blue); color: var(--ink); }
+    .badge-msu        { background: rgba(44,42,42,0.08); color: var(--ink); }
+    .exp-role { font-family: var(--font-display); font-size: 1.55rem; font-weight: 400; margin-bottom: 0.3rem; }
+    .exp-company { font-size: 0.79rem; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 1.1rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .exp-bullets li { font-size: 0.87rem; line-height: 1.65; color: var(--ink-soft); padding-left: 1.2rem; position: relative; font-weight: 300; }
+    .exp-bullets li::before { content: '→'; position: absolute; left: 0; color: var(--ink); font-size: 0.72rem; top: 0.1em; }
+    .exp-highlight { font-weight: 500; color: var(--ink); }
+
+    /* EDUCATION */
+    #education { background: var(--sage); }
+    .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .edu-card { background: var(--white); border-radius: 24px; padding: 2.4rem; position: relative; overflow: hidden; }
+    .edu-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; }
+    .edu-card.uw::before  { background: var(--yellow); }
+    .edu-card.msu::before { background: var(--blush); }
+    .edu-degree { font-family: var(--font-display); font-size: 1.4rem; font-weight: 400; margin-bottom: 0.35rem; line-height: 1.2; }
+    .edu-school { font-size: 0.8rem; color: var(--ink-soft); letter-spacing: 0.04em; margin-bottom: 0.3rem; }
+    .edu-year { font-family: var(--font-mono); font-size: 0.67rem; color: var(--ink-soft); margin-bottom: 1.3rem; }
+    .edu-gpa { display: inline-block; background: var(--sage); padding: 0.35rem 0.95rem; border-radius: 100px; font-size: 0.72rem; font-weight: 500; margin-bottom: 1.3rem; letter-spacing: 0.04em; }
+    .edu-research { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .edu-research li { font-size: 0.83rem; line-height: 1.7; color: var(--ink-soft); padding-left: 1.1rem; position: relative; font-weight: 300; }
+    .edu-research li::before { content: '✦'; position: absolute; left: 0; font-size: 0.5rem; top: 0.35rem; color: var(--ink-soft); }
+
+    /* OUTSIDE WORK */
+    #outside { background: var(--white); }
+    .outside-intro { font-size: 1rem; line-height: 1.8; color: var(--ink-soft); font-weight: 300; max-width: 560px; margin-bottom: 3rem; }
+    .outside-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+    .outside-card { border-radius: 20px; overflow: hidden; transition: transform 0.28s; background: var(--sage); }
+    .outside-card:hover { transform: translateY(-5px); }
+    .outside-photo { width: 100%; display: block; object-fit: cover; }
+    .outside-caption { padding: 1.25rem 1.5rem 1.5rem; background: var(--white); }
+    .outside-caption-loc { font-family: var(--font-mono); font-size: 0.63rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 0.35rem; }
+    .outside-caption-text { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; line-height: 1.3; }
+    .hike-info-card { border-radius: 20px; background: var(--yellow); padding: 2.4rem; display: flex; flex-direction: column; justify-content: center; }
+    .hike-icon { font-size: 2.2rem; margin-bottom: 1rem; }
+    .hike-title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 400; line-height: 1.2; margin-bottom: 0.9rem; }
+    .hike-desc { font-size: 0.87rem; line-height: 1.78; color: var(--ink-soft); font-weight: 300; }
+
+    /* CONTACT */
+    #contact { background: var(--blush); padding: 8rem 4rem; text-align: center; }
+    .contact-inner { max-width: 580px; margin: 0 auto; }
+    .contact-headline { font-family: var(--font-display); font-size: clamp(2.8rem, 5.5vw, 5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1.4rem; }
+    .contact-headline em { font-style: italic; color: var(--ink-soft); }
+    .contact-sub { font-size: 0.97rem; line-height: 1.8; color: var(--ink-soft); font-weight: 300; margin-bottom: 2.8rem; }
+    .contact-links { display: flex; justify-content: center; gap: 1.1rem; flex-wrap: wrap; }
+    .contact-detail { margin-top: 1.8rem; font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.12em; color: var(--ink-soft); }
+    .contact-detail a { color: var(--ink-soft); text-decoration: none; }
+    .contact-detail a:hover { color: var(--ink); }
+
+    /* FOOTER */
+    footer { background: var(--ink); color: rgba(253,252,251,0.35); padding: 1.8rem 4rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.73rem; letter-spacing: 0.08em; }
+    footer a { color: rgba(253,252,251,0.35); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--blush); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.65s ease, transform 0.65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.22s; }
+    .reveal-delay-3 { transition-delay: 0.34s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 960px) {
+      #hero { grid-template-columns: 1fr; }
+      .hero-right { height: 400px; }
+      .hero-left { padding: 4rem 2rem 3.5rem; }
+      .about-grid, .edu-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .research-grid { grid-template-columns: 1fr; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+      .outside-grid { grid-template-columns: 1fr; }
+      nav { padding: 1.1rem 1.5rem; }
+      .section-wrap, .research-section-wrap { padding: 5rem 1.5rem; }
+      #contact { padding: 6rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H10L5PMS21"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    // Gtag configuration for Google Analytics
+    gtag('config', 'G-H10L5PMS21');
+  </script>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a href="#hero" class="nav-logo">Priya Musale</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#research">Research</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#outside">Beyond Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">MS CS @ UW 27' · ML Researcher · Data & Software Engineer</p>
+    <h1 class="hero-name">Priya<br><em>Musale</em></h1>
+    <p class="hero-tagline">
+      MS CS student and ML researcher at UW Bothell's DAIS Lab, with 5+ years of industry experience building scalable data pipelines and backend systems.
+    </p>
+    <div class="hero-cta-row">
+      <a href="output_files/PriyaMusale_Resume.pdf" download class="btn btn-primary">↓ Download Resume</a>
+      <a href="#research" class="btn btn-outline">View Experience →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="output_files/photo_snow.jpg" alt="Priya Musale" class="hero-photo" />
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div>
+        <p class="section-label reveal">Introduction Section</p>
+        <h2 class="section-title reveal reveal-delay-1">About Me</h2>
+        <div class="about-text reveal reveal-delay-2">
+          <p>I'm a <strong>Master's CS student at UW Bothell</strong> and ML Researcher in the DAIS Lab under Prof. Dong Si, where I focus on Large Language Models (LLMs) and Natural Language Processing (NLP) for mental health applications.</p>
+          <p>With over <strong>5 years of industry experience</strong> in Data & Software Engineering at companies like Nationwide and LinkedIn, I've built production-grade data pipelines, backend systems, and ML monitoring frameworks.</p>
+          <p>My interests lie at the intersection of <strong>NLP, human-centered AI, and large-scale data</strong>.</p>
+        </div>
+      </div>
+      
+      <div class="about-skills-cluster reveal reveal-delay-3">
+        <h3 style="font-family: var(--font-display); font-size: 1.8rem; margin-bottom: 1.5rem;">My Tech Stack</h3>
+        
+        <div class="skill-category">
+          <span class="skill-category-title">AI & Machine Learning</span>
+          <div class="skill-pills">
+            <span class="pill blush">PyTorch</span>
+            <span class="pill blush">Hugging Face</span>
+            <span class="pill blush">Meta LLaMA</span>
+            <span class="pill blush">Sentence-BERT</span>
+            <span class="pill blush">NLP</span>
+            <span class="pill blush">Generative AI</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <span class="skill-category-title">Data Engineering</span>
+          <div class="skill-pills">
+            <span class="pill sage">Databricks</span>
+            <span class="pill sage">PySpark</span>
+            <span class="pill sage">AWS Glue</span>
+            <span class="pill sage">Pandas</span>
+          </div>
+        </div>
+
+        <div class="skill-category">
+          <span class="skill-category-title">Languages & Infra</span>
+          <div class="skill-pills">
+            <span class="pill yellow">Python</span>
+            <span class="pill yellow">SQL</span>
+            <span class="pill yellow">Docker</span>
+            <span class="pill yellow">Kubernetes</span>
+            <span class="pill yellow">AWS</span>
+            <span class="pill yellow">Git</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="research">
+  <div class="research-section-wrap">
+    <p class="section-label reveal">Project Section</p>
+    <h2 class="section-title reveal reveal-delay-1">Project Experience</h2>
+    <div class="research-grid">
+      <div class="research-card reveal">
+        <div class="rc-accent blush"></div>
+        <div class="rc-icon">🧠</div>
+        <h3 class="rc-title">LLM Empathy Evaluation</h3>
+        <p class="rc-desc">Fine-tuned Meta LLaMA models to evaluate therapeutic conversation summaries for empathy quality and clinical accuracy. Built an end-to-end monitoring framework to surface performance regressions in mental health support tools.</p>
+        <div class="rc-tags">
+          <span class="rc-tag">Meta LLaMA</span><span class="rc-tag">Fine-tuning</span><span class="rc-tag">Clinical NLP</span><span class="rc-tag">Hugging Face</span>
+        </div>
+      </div>
+      <div class="research-card reveal reveal-delay-1">
+        <div class="rc-accent sage"></div>
+        <div class="rc-icon">💬</div>
+        <h3 class="rc-title">iCare Adaptive Chatbot</h3>
+        <p class="rc-desc">Engineered a personality-adaptive conversational framework using PyTorch and Sentence-BERT to dynamically adjust LLM personas based on real-time user emotion classification — making mental health AI more responsive.</p>
+        <div class="rc-tags">
+          <span class="rc-tag">Sentence-BERT</span><span class="rc-tag">PyTorch</span><span class="rc-tag">Emotion Detection</span><span class="rc-tag">Persona Modeling</span>
+        </div>
+      </div>
+      <div class="research-card reveal reveal-delay-2">
+        <div class="rc-accent yellow"></div>
+        <div class="rc-icon">🔬</div>
+        <h3 class="rc-title">Deep Embedded Clustering</h3>
+        <p class="rc-desc">Applied unsupervised Deep Embedded Clustering to decouple user coping mechanisms from generative text, enabling more targeted therapeutic interaction styles without relying on labeled training data.</p>
+        <div class="rc-tags">
+          <span class="rc-tag">DEC</span><span class="rc-tag">Unsupervised ML</span><span class="rc-tag">Generative AI</span><span class="rc-tag">NLP</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="section-wrap">
+    <p class="section-label reveal">Industry Section</p>
+    <h2 class="section-title reveal reveal-delay-1">Work Experience</h2>
+    <div class="exp-timeline">
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Jun 2023 – Aug 2025</div>
+          <div class="exp-badge badge-nationwide">Nationwide</div>
+        </div>
+        <div>
+          <div class="exp-role">Data Engineer</div>
+          <div class="exp-company">Nationwide · Phoenix, AZ (Remote)</div>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); font-weight: 300; margin-bottom: 0.8rem;">
+            Led the migration of legacy data pipelines to a modern Databricks architecture and coordinated a 24-member global engineering team.
+          </p>
+          <ul class="exp-bullets">
+            <li>Migrated <span class="exp-highlight">12 AWS Glue PySpark jobs</span> to Databricks, cutting batch runtime from 8 hours to 2</li>
+            <li>Optimized 150+ Kubernetes and Docker batch jobs, reducing failure tickets from <span class="exp-highlight">1,000+ to <10/month</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">May 2022 – Jun 2023</div>
+          <div class="exp-badge badge-linkedin">LinkedIn</div>
+        </div>
+        <div>
+          <div class="exp-role">Full Stack Developer</div>
+          <div class="exp-company">LinkedIn · Sunnyvale, CA (Remote)</div>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); font-weight: 300; margin-bottom: 0.8rem;">
+            Drove critical backend modernization for the HireIn platform, upgrading legacy systems and resolving key security vulnerabilities.
+          </p>
+          <ul class="exp-bullets">
+            <li>Upgraded core backend from <span class="exp-highlight">Python 3.7 to 3.10</span>, resolving critical CVEs for millions of recruiters</li>
+            <li>Trimmed high-traffic page load from <span class="exp-highlight">~4s to ~3s</span> by overhauling JavaScript queries and frontend logic</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Feb 2021 – May 2022</div>
+          <div class="exp-badge badge-jpmorgan">JPMorgan</div>
+        </div>
+        <div>
+          <div class="exp-role">Python Developer</div>
+          <div class="exp-company">JPMorgan Chase & Co. · Houston, TX</div>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); font-weight: 300; margin-bottom: 0.8rem;">
+            Architected high-speed data pipelines and Python APIs to accelerate quantitative analysis and trading decisions.
+          </p>
+          <ul class="exp-bullets">
+            <li>Automated data quality reporting across <span class="exp-highlight">500,000+ records</span>, surfacing datasets an hour earlier per run</li>
+            <li>Optimized Python and SQL workflows, <span class="exp-highlight">shaving 30+ minutes per run</span> across time-sensitive analyst datasets</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Jun 2019 – Dec 2020</div>
+          <div class="exp-badge badge-msu">NSPARC</div>
+        </div>
+        <div>
+          <div class="exp-role">Computer Specialist & Student Worker</div>
+          <div class="exp-company">NSPARC, Mississippi State University · Starkville, MS</div>
+          <p style="font-size: 0.9rem; line-height: 1.6; color: var(--ink-soft); font-weight: 300;">
+            Provided hands-on technical support, maintained campus IT infrastructure, and assisted with day-to-day administrative tasks for the research center.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-wrap">
+    <div class="edu-grid">
+      <div>
+        <p class="section-label reveal">Education Section</p>
+        <h2 class="section-title reveal reveal-delay-1">Education</h2>
+        <p style="font-size:1rem; line-height:1.8; color:var(--ink-soft); font-weight:300; max-width:340px;" class="reveal reveal-delay-2">
+          From Mississippi State to UW Bothell — building the theoretical foundation to complement years of engineering practice.
+        </p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:1.4rem;">
+        <div class="edu-card uw reveal">
+          <div class="edu-degree">M.S. Computer Science & Software Engineering</div>
+          <div class="edu-school">University of Washington, Bothell</div>
+          <div class="edu-year">Sep 2025 – Jun 2027</div>
+          <div class="edu-gpa">GPA: 3.98</div>
+          <ul class="edu-research">
+            <li>Fine-tuning LLaMA for empathy evaluation in therapeutic AI (iCare/DAIS Lab, Dr. Dong Si)</li>
+            <li>Personality-adaptive chatbot with real-time emotion classification via Sentence-BERT</li>
+            <li>Unsupervised Deep Embedded Clustering for coping mechanism detection</li>
+          </ul>
+        </div>
+        <div class="edu-card msu reveal reveal-delay-1">
+          <div class="edu-degree">B.S. Computer Science</div>
+          <div class="edu-school">Mississippi State University</div>
+          <div class="edu-year">Aug 2016 – May 2020</div>
+          <ul class="edu-research">
+            <li><strong>NSPARC Computer Specialist & Student Worker:</strong> Provided hands-on technical support and maintained campus IT infrastructure.</li>
+            <li><strong>Resident Advisor:</strong> Fostered a supportive, inclusive community environment and developed strong leadership and conflict-resolution skills.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outside">
+  <div class="section-wrap">
+    <p class="section-label reveal">Life Outside Work</p>
+    <h2 class="section-title reveal reveal-delay-1">Beyond Work</h2>
+    <p class="outside-intro reveal reveal-delay-2">
+      When I'm not training models or building pipelines, I love to travel, hike, and explore trails across the country.
+    </p>
+
+    <div class="outside-grid">
+
+      <div class="outside-card reveal">
+        <img src="output_files/photo_hike.jpg" alt="Trail sign at Rocky Mountain National Park, Colorado" class="outside-photo" style="height:360px; object-fit:cover; object-position: center;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🏔 Rocky Mountain National Park, Colorado</div>
+          <div class="outside-caption-text">Nymph Lake → Dream Lake → Emerald Lake → Lake Haiyaha — my favorite hike</div>
+        </div>
+      </div>
+
+      <div class="hike-info-card reveal reveal-delay-1">
+        <div class="hike-icon">🥾</div>
+        <div class="hike-title">I love to hike!</div>
+        <p class="hike-desc">
+          My favorite hike was in Rocky Mountain National Park, Colorado — starting at Nymph Lake and pushing all the way up to Lake Haiyaha.
+          <br><br>
+          Whether it's Pacific Northwest forests, desert canyons, or alpine lakes, I'm happiest when I'm exploring new places.
+        </p>
+      </div>
+
+      <div class="outside-card reveal">
+        <img src="output_files/photo_horseshoe.jpg" alt="Horseshoe Bend, Arizona" class="outside-photo" style="height:320px; object-fit:cover; object-position: center 30%;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🪨 Page, Arizona</div>
+          <div class="outside-caption-text">Horseshoe Bend</div>
+        </div>
+      </div>
+
+      <div class="outside-card reveal reveal-delay-1">
+        <img src="output_files/photo_raft.jpg" alt="River rafting at Smoky Mountains National Park" class="outside-photo" style="height:320px; object-fit:cover;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🌊 Great Smoky Mountains National Park</div>
+          <div class="outside-caption-text">River rafting — full send</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label reveal" style="text-align:center; color:var(--ink-soft);">Let's Get in Touch</p>
+    <h2 class="contact-headline reveal reveal-delay-1">Contact <em>Me</em></h2>
+    <p class="contact-sub reveal reveal-delay-2">
+      I'm always open to collaborations and new opportunities. Feel free to reach out!
+    </p>
+    <div class="contact-links reveal reveal-delay-3">
+      <a href="#" id="secure-email" class="btn btn-primary">✉ Email Me</a>
+      <a href="https://linkedin.com/in/priyamusale" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      <a href="output_files/PriyaMusale_Resume.pdf" download class="btn btn-outline">↓ Resume</a>
+    </div>
+    <p class="contact-detail reveal">
+      <a href="https://github.com/priyamusale" target="_blank">GitHub</a> · Seattle, WA
+    </p>
+  </div>
+</section>
+
+<footer>
+  <span>© 2026 Priya Musale</span>
+  <span>Seattle, WA</span>
+  <span><a href="#" id="secure-email" class="btn btn-primary">✉ Email Me</a></span>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button, .research-card, .exp-item, .stat-card, .outside-card').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('grow'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('grow'));
+  });
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  // Build the email dynamically to trick scraping bots
+  const btn = document.getElementById('secure-email');
+  if (btn) {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const user = "priyamusale04";
+      const domain = "gmail.com";
+      window.location.href = "mailto:" + user + "@" + domain;
+    });
+  }
+</script>
+
+</body>
+</html>
