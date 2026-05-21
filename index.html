@@ -74,7 +74,7 @@
     .card-category.hci{background:rgba(226,240,203,.13);border:1px solid rgba(226,240,203,.32);color:var(--sage);}
     .card-category.hack{background:rgba(255,242,204,.13);border:1px solid rgba(255,242,204,.32);color:var(--yellow);}
     /* Secondary row: 3 equal cards */
-    .projects-secondary{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .projects-secondary{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
     .project-card.secondary{opacity:.9;}
     /* External link badge inside card */
     .card-link-badge{display:inline-flex;align-items:center;gap:.3rem;margin-top:1.1rem;padding:.3rem .75rem;border-radius:100px;font-size:.63rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(253,252,251,.2);color:rgba(253,252,251,.5);text-decoration:none;transition:all .2s;width:fit-content;}
@@ -354,6 +354,15 @@
         <a href="https://dawg-den.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="card-link-badge">↗ Live Site</a>
         <span class="card-hint">Click to expand ↗</span>
       </div>
+      <div class="project-card secondary reveal reveal-delay-3" onclick="openModal('m-quantum')">
+        <div class="card-category hack">🥉 UW–IBM Quantum Hackathon</div>
+        <div class="rc-accent yellow"></div>
+        <div class="rc-icon">⚛️</div>
+        <h3 class="rc-title">Quantum ML — CAR T-Cell Prediction</h3>
+        <p class="rc-desc">Awarded 3rd place in the UW–IBM Quantum Machine Learning Hackathon for investigating when quantum data encoding outperforms classical ML on CAR T-cell cytotoxicity prediction using IBM Heron R2 hardware.</p>
+        <div class="rc-tags"><span class="rc-tag">Qiskit</span><span class="rc-tag">Quantum ML</span><span class="rc-tag">IBM QPU</span><span class="rc-tag">SVM</span></div>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
     </div>
   </div>
 </section>
@@ -464,6 +473,27 @@
     <div class="modal-stack-title">Tech Stack</div>
     <div class="modal-stack">
       <span class="modal-stack-pill">Next.js</span><span class="modal-stack-pill">Vercel</span><span class="modal-stack-pill">ElevenLabs</span><span class="modal-stack-pill">Gemma 4</span><span class="modal-stack-pill">UW Auth</span><span class="modal-stack-pill">Full Stack</span><span class="modal-stack-pill">LLM</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-quantum" onclick="overlayClose(event,'m-quantum')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-quantum')">✕</button>
+    <div class="modal-accent yellow"></div>
+    <div class="modal-icon">⚛️</div>
+    <div class="modal-title">Quantum ML — CAR T-Cell Prediction</div>
+    <div class="modal-context">🥉 3rd Place · UW–IBM Quantum Machine Learning Hackathon · May 2026</div>
+    <p class="modal-desc">Investigated whether quantum data encoding genuinely outperforms classical ML on a real biomedical problem — CAR T-cell cytotoxicity prediction — using IBM's Heron R2 quantum hardware. Uncovered a dimensionality paradox with implications for near-term quantum advantage claims.</p>
+    <ul class="modal-bullets">
+      <li>Discovered a <strong>dimensionality paradox</strong>: quantum projected kernels (180-dim) underperform classical SVM at small training sizes despite theoretical predictions of the opposite</li>
+      <li>Ran <strong>live QPU kernel computation</strong> using Qiskit Runtime EstimatorV2 + Batch on IBM Heron R2 hardware (172-sample binary classification)</li>
+      <li>Validated findings via <strong>paired permutation tests</strong>, learning curve analysis, noise robustness sweeps, and position-shuffling ablations across 4 tracks</li>
+      <li>Results contribute to the real-world understanding of quantum advantage boundaries in small-data, high-dimensional biomedical settings</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Qiskit</span><span class="modal-stack-pill">IBM Heron R2</span><span class="modal-stack-pill">Quantum Kernels</span><span class="modal-stack-pill">Classical SVM</span><span class="modal-stack-pill">Permutation Tests</span><span class="modal-stack-pill">Python</span><span class="modal-stack-pill">Quantum ML</span>
     </div>
   </div>
 </div>
@@ -655,7 +685,7 @@
   // Escape key closes all
   document.addEventListener('keydown', e => {
     if(e.key==='Escape'){
-      ['m-empathy','m-icare','m-dec','m-camaraderie','m-dawgden'].forEach(closeModal);
+      ['m-empathy','m-icare','m-dec','m-camaraderie','m-dawgden','m-quantum'].forEach(closeModal);
       closeResume();
     }
   });
