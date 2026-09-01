@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Priya Musale | ML Researcher & Data Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --blush:#FADADD;--sage:#E2F0CB;--yellow:#FFF2CC;--blue:#DAE8FC;
+      --ink:#2C2A2A;--ink-soft:#5A5555;--white:#FDFCFB;
+      --font-display:'Cormorant Garamond',serif;
+      --font-body:'DM Sans',sans-serif;
+      --font-mono:'DM Mono',monospace;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:var(--font-body);background:var(--white);color:var(--ink);overflow-x:hidden;}
+    nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:1.25rem 3.5rem;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(14px);background:rgba(253,252,251,0.82);border-bottom:1px solid rgba(201,228,222,0.35);}
+    .nav-logo{font-family:var(--font-display);font-size:1.3rem;font-weight:400;color:var(--ink);text-decoration:none;letter-spacing:.02em;}
+    .nav-links{display:flex;gap:2rem;list-style:none;}
+    .nav-links a{text-decoration:none;font-size:.73rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-soft);transition:color .2s;}
+    .nav-links a:hover{color:var(--ink);}
+    #hero{min-height:100vh;padding-top:70px;display:grid;grid-template-columns:1fr 1fr;}
+    .hero-left{background:var(--blush);display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem;}
+    .hero-eyebrow{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.6rem;opacity:0;animation:fadeUp .9s ease forwards .3s;}
+    .hero-name{font-family:var(--font-display);font-size:clamp(3.8rem,6vw,6.5rem);line-height:.95;font-weight:300;color:var(--ink);opacity:0;animation:fadeUp 1s ease forwards .5s;}
+    .hero-name em{font-style:italic;color:var(--ink-soft);}
+    .hero-tagline{margin-top:2rem;font-size:1rem;line-height:1.78;color:var(--ink-soft);max-width:380px;font-weight:300;opacity:0;animation:fadeUp 1s ease forwards .75s;}
+    .hero-cta-row{margin-top:2.5rem;display:flex;gap:.9rem;flex-wrap:wrap;opacity:0;animation:fadeUp 1s ease forwards 1s;}
+    .btn{display:inline-flex;align-items:center;gap:.45rem;padding:.7rem 1.5rem;border-radius:100px;font-size:.74rem;letter-spacing:.09em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:all .22s;border:1.5px solid var(--ink);font-family:var(--font-body);background:transparent;color:var(--ink);}
+    .btn-primary{background:var(--ink);color:var(--white);}
+    .btn-primary:hover{background:var(--ink-soft);transform:translateY(-2px);}
+    .btn-outline:hover{background:var(--blue);transform:translateY(-2px);}
+    .hero-right{position:relative;overflow:hidden;min-height:500px;}
+    .hero-photo{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+    .hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,rgba(250,218,221,.15) 0%,transparent 35%);pointer-events:none;}
+    .section-wrap{max-width:1280px;margin:0 auto;padding:7rem 4rem;}
+    .section-label{font-family:var(--font-mono);font-size:.67rem;letter-spacing:.25em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.7rem;}
+    .section-title{font-family:var(--font-display);font-size:clamp(2.4rem,4vw,3.6rem);font-weight:300;line-height:1.1;margin-bottom:3rem;}
+    .section-title em{font-style:italic;color:var(--ink-soft);}
+    #about{background:var(--white);}
+    .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;}
+    .about-text{font-size:1rem;line-height:1.85;color:var(--ink-soft);font-weight:300;}
+    .about-text p+p{margin-top:1.2rem;}
+    .about-text strong{color:var(--ink);font-weight:500;}
+    .about-skills-cluster{display:flex;flex-direction:column;gap:1.5rem;}
+    .skill-category{display:flex;flex-direction:column;gap:.5rem;}
+    .skill-category-title{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.1em;color:var(--ink-soft);text-transform:uppercase;}
+    .skill-pills{display:flex;flex-wrap:wrap;gap:.5rem;}
+    .pill{padding:.4rem 1rem;border-radius:100px;font-size:.8rem;color:var(--ink);transition:all .3s cubic-bezier(.25,.8,.25,1);cursor:default;border:1px solid rgba(44,42,42,.1);}
+    .pill.blush{background:rgba(250,218,221,.4);}
+    .pill.sage{background:rgba(226,240,203,.4);}
+    .pill.yellow{background:rgba(255,242,204,.4);}
+    .pill:hover{transform:translateY(-3px);border-color:var(--ink);background:var(--white);}
+    #projects{background:var(--ink);}
+    .projects-section-wrap{max-width:1280px;margin:0 auto;padding:7rem 4rem;}
+    #projects .section-label{color:rgba(253,252,251,.4);}
+    #projects .section-title{color:var(--white);}
+    #projects .section-title em{color:var(--yellow);}
+    .projects-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+    .project-card{border:1px solid rgba(253,252,251,.1);border-radius:20px;padding:2.2rem;transition:all .3s;cursor:pointer;position:relative;}
+    .project-card:hover{border-color:rgba(253,252,251,.35);background:rgba(253,252,251,.06);transform:translateY(-5px);}
+    .project-card:hover .card-hint{opacity:1;}
+    .card-hint{position:absolute;bottom:1.2rem;right:1.4rem;font-family:var(--font-mono);font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:rgba(253,252,251,.3);opacity:0;transition:opacity .2s;}
+    /* Featured LLM row: 2 wide cards side by side */
+    .projects-featured{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem;}
+    .project-card.featured{border-width:1.5px;border-color:rgba(253,252,251,.18);background:rgba(253,252,251,.03);}
+    .project-card.featured .rc-title{font-size:1.6rem;}
+    .card-category{display:inline-flex;align-items:center;gap:.4rem;border-radius:100px;padding:.22rem .7rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.9rem;}
+    .card-category.llm{background:rgba(250,218,221,.15);border:1px solid rgba(250,218,221,.3);color:var(--blush);}
+    .card-category.hci{background:rgba(226,240,203,.13);border:1px solid rgba(226,240,203,.32);color:var(--sage);}
+    .card-category.hack{background:rgba(255,242,204,.13);border:1px solid rgba(255,242,204,.32);color:var(--yellow);}
+    /* Secondary row: 3 equal cards */
+    .projects-secondary{display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;}
+    .project-card.secondary{opacity:.9;}
+    /* External link badge inside card */
+    .card-link-badge{display:inline-flex;align-items:center;gap:.3rem;margin-top:1.1rem;padding:.3rem .75rem;border-radius:100px;font-size:.63rem;letter-spacing:.06em;text-transform:uppercase;border:1px solid rgba(253,252,251,.2);color:rgba(253,252,251,.5);text-decoration:none;transition:all .2s;width:fit-content;}
+    .card-link-badge:hover{border-color:rgba(253,252,251,.5);color:rgba(253,252,251,.9);background:rgba(253,252,251,.06);}
+    /* Modal external link */
+    .modal-ext-link{display:inline-flex;align-items:center;gap:.4rem;margin-bottom:1.4rem;padding:.35rem .9rem;border-radius:100px;font-size:.7rem;letter-spacing:.06em;border:1.5px solid rgba(44,42,42,.15);color:var(--ink-soft);text-decoration:none;transition:all .2s;}
+    .modal-ext-link:hover{border-color:var(--ink);color:var(--ink);background:rgba(44,42,42,.04);}
+    .rc-accent{width:44px;height:4px;border-radius:2px;margin-bottom:1.4rem;}
+    .rc-accent.blush{background:var(--blush);}
+    .rc-accent.sage{background:var(--sage);}
+    .rc-accent.yellow{background:var(--yellow);}
+    .rc-icon{font-size:1.8rem;margin-bottom:.9rem;}
+    .rc-title{font-family:var(--font-display);font-size:1.4rem;font-weight:400;margin-bottom:.75rem;line-height:1.2;color:var(--white);}
+    .rc-desc{font-size:.84rem;line-height:1.75;color:rgba(253,252,251,.58);font-weight:300;}
+    .rc-tags{margin-top:1.4rem;display:flex;flex-wrap:wrap;gap:.45rem;}
+    .rc-tag{padding:.28rem .7rem;border-radius:100px;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;border:1px solid rgba(253,252,251,.15);color:rgba(253,252,251,.55);}
+    .modal-overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(20,18,18,.78);backdrop-filter:blur(7px);align-items:center;justify-content:center;padding:2rem;}
+    .modal-overlay.open{display:flex;}
+    .modal-box{background:var(--white);border-radius:24px;max-width:640px;width:100%;max-height:88vh;overflow-y:auto;padding:2.8rem;position:relative;animation:modalIn .3s cubic-bezier(.34,1.56,.64,1);}
+    @keyframes modalIn{from{opacity:0;transform:scale(.92) translateY(20px);}to{opacity:1;transform:scale(1) translateY(0);}}
+    .modal-close{position:absolute;top:1.2rem;right:1.4rem;background:rgba(44,42,42,.07);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;color:var(--ink);}
+    .modal-close:hover{background:var(--blush);}
+    .modal-accent{width:48px;height:4px;border-radius:2px;margin-bottom:1.2rem;}
+    .modal-accent.blush{background:var(--blush);}
+    .modal-accent.sage{background:var(--sage);}
+    .modal-accent.yellow{background:var(--yellow);}
+    .modal-icon{font-size:2.2rem;margin-bottom:.7rem;}
+    .modal-title{font-family:var(--font-display);font-size:2rem;font-weight:400;margin-bottom:.5rem;}
+    .modal-context{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:1.4rem;}
+    .modal-desc{font-size:.93rem;line-height:1.8;color:var(--ink-soft);font-weight:300;margin-bottom:1.6rem;}
+    .modal-bullets{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:1.8rem;}
+    .modal-bullets li{font-size:.88rem;line-height:1.65;color:var(--ink-soft);padding-left:1.3rem;position:relative;font-weight:300;}
+    .modal-bullets li::before{content:'→';position:absolute;left:0;color:var(--ink);font-size:.72rem;top:.1em;}
+    .modal-bullets li strong{color:var(--ink);font-weight:500;}
+    .modal-stack-title{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.7rem;}
+    .modal-stack{display:flex;flex-wrap:wrap;gap:.45rem;}
+    .modal-stack-pill{padding:.32rem .85rem;border-radius:100px;font-size:.72rem;border:1px solid rgba(44,42,42,.12);color:var(--ink);background:rgba(44,42,42,.04);}
+    #experience{background:var(--white);}
+    .exp-timeline{display:flex;flex-direction:column;}
+    .exp-item{display:grid;grid-template-columns:180px 1fr;gap:3rem;padding:2.8rem 1rem;border-bottom:1px solid rgba(44,42,42,.09);border-radius:14px;transition:background .22s;}
+    .exp-item:first-child{border-top:1px solid rgba(44,42,42,.09);}
+    .exp-item:hover{background:var(--blue);}
+    .exp-meta{color:var(--ink-soft);}
+    .exp-year{font-family:var(--font-display);font-size:1rem;font-weight:300;margin-bottom:.6rem;}
+    .exp-badge{display:inline-block;padding:.28rem .75rem;border-radius:100px;font-size:.61rem;letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
+    .badge-nationwide{background:var(--sage);color:var(--ink);}
+    .badge-linkedin{background:var(--yellow);color:var(--ink);}
+    .badge-jpmorgan{background:var(--blue);color:var(--ink);}
+    .badge-msu{background:rgba(44,42,42,.08);color:var(--ink);}
+    .exp-role{font-family:var(--font-display);font-size:1.55rem;font-weight:400;margin-bottom:.3rem;}
+    .exp-company{font-size:.79rem;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:1.1rem;}
+    .exp-bullets{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+    .exp-bullets li{font-size:.87rem;line-height:1.65;color:var(--ink-soft);padding-left:1.2rem;position:relative;font-weight:300;}
+    .exp-bullets li::before{content:'→';position:absolute;left:0;color:var(--ink);font-size:.72rem;top:.1em;}
+    .exp-highlight{font-weight:500;color:var(--ink);}
+    #education{background:var(--sage);}
+    .edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
+    .edu-card{background:var(--white);border-radius:24px;padding:2.4rem;position:relative;overflow:hidden;}
+    .edu-card::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;}
+    .edu-card.uw::before{background:var(--yellow);}
+    .edu-card.msu::before{background:var(--blush);}
+    .edu-degree{font-family:var(--font-display);font-size:1.4rem;font-weight:400;margin-bottom:.35rem;line-height:1.2;}
+    .edu-school{font-size:.8rem;color:var(--ink-soft);letter-spacing:.04em;margin-bottom:.3rem;}
+    .edu-year{font-family:var(--font-mono);font-size:.67rem;color:var(--ink-soft);margin-bottom:1.3rem;}
+    .edu-gpa{display:inline-block;background:var(--sage);padding:.35rem .95rem;border-radius:100px;font-size:.72rem;font-weight:500;margin-bottom:1.3rem;letter-spacing:.04em;}
+    .edu-research{list-style:none;display:flex;flex-direction:column;gap:.55rem;}
+    .edu-research li{font-size:.83rem;line-height:1.7;color:var(--ink-soft);padding-left:1.1rem;position:relative;font-weight:300;}
+    .edu-research li::before{content:'✦';position:absolute;left:0;font-size:.5rem;top:.35rem;color:var(--ink-soft);}
+    #outside{background:var(--white);}
+    .outside-intro{font-size:1rem;line-height:1.8;color:var(--ink-soft);font-weight:300;max-width:560px;margin-bottom:3rem;}
+    .outside-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;align-items:start;}
+    .outside-card{border-radius:20px;overflow:hidden;transition:transform .28s;background:var(--sage);}
+    .outside-card:hover{transform:translateY(-5px);}
+    .outside-photo{width:100%;display:block;object-fit:cover;}
+    .outside-caption{padding:1.25rem 1.5rem 1.5rem;background:var(--white);}
+    .outside-caption-loc{font-family:var(--font-mono);font-size:.63rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:.35rem;}
+    .outside-caption-text{font-family:var(--font-display);font-size:1.1rem;font-weight:400;line-height:1.3;}
+    .hike-info-card{border-radius:20px;background:var(--yellow);padding:2.4rem;display:flex;flex-direction:column;justify-content:center;}
+    .hike-icon{font-size:2.2rem;margin-bottom:1rem;}
+    .hike-title{font-family:var(--font-display);font-size:1.5rem;font-weight:400;line-height:1.2;margin-bottom:.9rem;}
+    .hike-desc{font-size:.87rem;line-height:1.78;color:var(--ink-soft);font-weight:300;}
+    .resume-overlay{display:none;position:fixed;inset:0;z-index:2000;background:rgba(20,18,18,.82);backdrop-filter:blur(8px);align-items:center;justify-content:center;padding:1.5rem;}
+    .resume-overlay.open{display:flex;}
+    .resume-box{background:var(--white);border-radius:20px;width:100%;max-width:860px;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;animation:modalIn .3s cubic-bezier(.34,1.56,.64,1);}
+    .resume-header{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.8rem;border-bottom:1px solid rgba(44,42,42,.08);}
+    .resume-header span{font-family:var(--font-display);font-size:1.3rem;font-weight:400;}
+    .resume-actions{display:flex;gap:.75rem;align-items:center;}
+    .resume-body{flex:1;overflow:hidden;}
+    .resume-body iframe{width:100%;height:100%;border:none;min-height:70vh;display:block;}
+    .icon-btn{background:rgba(44,42,42,.07);border:none;border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:background .2s;color:var(--ink);}
+    .icon-btn:hover{background:var(--blush);}
+    #contact{background:var(--blush);padding:8rem 4rem;text-align:center;}
+    .contact-inner{max-width:580px;margin:0 auto;}
+    .contact-headline{font-family:var(--font-display);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:300;line-height:1.05;margin-bottom:1.4rem;}
+    .contact-headline em{font-style:italic;color:var(--ink-soft);}
+    .contact-sub{font-size:.97rem;line-height:1.8;color:var(--ink-soft);font-weight:300;margin-bottom:2.8rem;}
+    .contact-links{display:flex;justify-content:center;gap:1.1rem;flex-wrap:wrap;}
+    .contact-detail{margin-top:1.8rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;color:var(--ink-soft);}
+    .contact-detail a{color:var(--ink-soft);text-decoration:none;}
+    .contact-detail a:hover{color:var(--ink);}
+    footer{background:var(--ink);color:rgba(253,252,251,.35);padding:1.8rem 4rem;display:flex;justify-content:space-between;align-items:center;font-size:.73rem;letter-spacing:.08em;}
+    footer a{color:rgba(253,252,251,.35);text-decoration:none;transition:color .2s;}
+    footer a:hover{color:var(--blush);}
+    @keyframes fadeUp{from{opacity:0;transform:translateY(20px);}to{opacity:1;transform:translateY(0);}}
+    .reveal{opacity:0;transform:translateY(28px);transition:opacity .65s ease,transform .65s ease;}
+    .reveal.visible{opacity:1;transform:translateY(0);}
+    .reveal-delay-1{transition-delay:.1s;}
+    .reveal-delay-2{transition-delay:.22s;}
+    .reveal-delay-3{transition-delay:.34s;}
+    @media(max-width:960px){
+      #hero{grid-template-columns:1fr;}
+      .hero-right{height:400px;}
+      .hero-left{padding:4rem 2rem 3.5rem;}
+      .about-grid,.edu-grid{grid-template-columns:1fr;gap:2.5rem;}
+      .projects-featured,.projects-secondary{grid-template-columns:1fr;}
+      .exp-item{grid-template-columns:1fr;gap:.8rem;}
+      .outside-grid{grid-template-columns:1fr;}
+      nav{padding:1.1rem 1.5rem;}
+      .section-wrap,.projects-section-wrap{padding:5rem 1.5rem;}
+      #contact{padding:6rem 1.5rem;}
+      footer{flex-direction:column;gap:.5rem;text-align:center;}
+    }
+    @media(max-width:600px){.nav-links{display:none;}}
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-H10L5PMS21"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-H10L5PMS21');</script>
+</head>
+<body>
+
+<nav>
+  <a href="#hero" class="nav-logo">Priya Musale</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#outside">Beyond Work</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">MS CS @ UW 27' · ML Researcher · Data & Software Engineer</p>
+    <h1 class="hero-name">Priya<br><em>Musale</em></h1>
+    <p class="hero-tagline">MS CS student and ML researcher at UW Bothell's DAIS Lab, with 5+ years of industry experience building scalable data pipelines and backend systems.</p>
+    <div class="hero-cta-row">
+      <button onclick="openResume()" class="btn btn-primary">↗ View Resume</button>
+      <a href="#projects" class="btn btn-outline">View Projects →</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="output_files/photo_snow.jpg" alt="Priya Musale" class="hero-photo" />
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div>
+        <p class="section-label reveal">Introduction</p>
+        <h2 class="section-title reveal reveal-delay-1">About Me</h2>
+        <div class="about-text reveal reveal-delay-2">
+          <p>I'm a <strong>Master's CS student at UW Bothell</strong> and ML Researcher in the DAIS Lab under Prof. Dong Si, where I focus on Large Language Models (LLMs) and Natural Language Processing (NLP) for mental health applications.</p>
+          <p>With over <strong>5 years of industry experience</strong> in Data & Software Engineering at companies like Nationwide and LinkedIn, I've built production-grade data pipelines, backend systems, and ML monitoring frameworks.</p>
+          <p>My interests lie at the intersection of <strong>NLP, human-centered AI, and large-scale data</strong>.</p>
+        </div>
+      </div>
+      <div class="about-skills-cluster reveal reveal-delay-3">
+        <h3 style="font-family:var(--font-display);font-size:1.8rem;margin-bottom:1.5rem;">My Tech Stack</h3>
+        <div class="skill-category">
+          <span class="skill-category-title">AI & Machine Learning</span>
+          <div class="skill-pills">
+            <span class="pill blush">PyTorch</span>
+            <span class="pill blush">Hugging Face</span>
+            <span class="pill blush">Meta LLaMA</span>
+            <span class="pill blush">Sentence-BERT</span>
+            <span class="pill blush">RAG</span>
+            <span class="pill blush">LLM Evaluation</span>
+            <span class="pill blush">Generative AI</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <span class="skill-category-title">NLP Techniques</span>
+          <div class="skill-pills">
+            <span class="pill sage">Fine-tuning</span>
+            <span class="pill sage">RLHF</span>
+            <span class="pill sage">Prompt Engineering</span>
+            <span class="pill sage">Text Classification</span>
+            <span class="pill sage">Embeddings</span>
+            <span class="pill sage">Semantic Search</span>
+            <span class="pill sage">Transformers</span>
+            <span class="pill sage">NER</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <span class="skill-category-title">Data Engineering</span>
+          <div class="skill-pills">
+            <span class="pill yellow">Databricks</span>
+            <span class="pill yellow">PySpark</span>
+            <span class="pill yellow">AWS Glue</span>
+            <span class="pill yellow">Pandas</span>
+            <span class="pill yellow">Kafka</span>
+          </div>
+        </div>
+        <div class="skill-category">
+          <span class="skill-category-title">Languages & Infra</span>
+          <div class="skill-pills">
+            <span class="pill blush">Python</span>
+            <span class="pill blush">SQL</span>
+            <span class="pill blush">Docker</span>
+            <span class="pill blush">Kubernetes</span>
+            <span class="pill blush">AWS</span>
+            <span class="pill blush">Git</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="projects-section-wrap">
+    <p class="section-label reveal">Research & Projects</p>
+    <h2 class="section-title reveal reveal-delay-1">Project <em>Experience</em></h2>
+
+    <!-- Featured: LLM Research (2 wide cards) -->
+    <div class="projects-featured">
+      <div class="project-card featured reveal" onclick="openModal('m-empathy')">
+        <div class="card-category llm">🧠 LLM Research</div>
+        <div class="rc-accent blush"></div>
+        <div class="rc-icon"></div>
+        <h3 class="rc-title">LLM Empathy Evaluation</h3>
+        <p class="rc-desc">Fine-tuned Meta LLaMA to evaluate therapeutic conversation summaries for empathy quality and clinical accuracy. Built an end-to-end monitoring framework for mental health AI.</p>
+        <div class="rc-tags"><span class="rc-tag">Meta LLaMA</span><span class="rc-tag">Fine-tuning</span><span class="rc-tag">Clinical NLP</span><span class="rc-tag">LLM Evaluation</span></div>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+      <div class="project-card featured reveal reveal-delay-1" onclick="openModal('m-icare')">
+        <div class="card-category llm">🧠 LLM Research</div>
+        <div class="rc-accent sage"></div>
+        <div class="rc-icon"></div>
+        <h3 class="rc-title">iCare Adaptive Chatbot</h3>
+        <p class="rc-desc">Personality-adaptive conversational framework using PyTorch and Sentence-BERT for dynamic LLM persona adjustment based on real-time emotion classification. Extended with a RAG pipeline grounded in DEC-derived user clusters.</p>
+        <div class="rc-tags"><span class="rc-tag">Sentence-BERT</span><span class="rc-tag">PyTorch</span><span class="rc-tag">Emotion Detection</span><span class="rc-tag">RAG</span></div>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+    </div>
+
+    <!-- Secondary: remaining 3 projects -->
+    <div class="projects-secondary">
+      <div class="project-card secondary reveal" onclick="openModal('m-dec')">
+        <div class="card-category llm">🧠 LLM Research</div>
+        <div class="rc-accent yellow"></div>
+        <div class="rc-icon">🔬</div>
+        <h3 class="rc-title">Deep Embedded Clustering</h3>
+        <p class="rc-desc">Unsupervised DEC to decouple user coping mechanisms from generative text for targeted therapeutic interaction styles.</p>
+        <div class="rc-tags"><span class="rc-tag">DEC</span><span class="rc-tag">Unsupervised ML</span><span class="rc-tag">NLP</span></div>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+      <div class="project-card secondary reveal reveal-delay-1" onclick="openModal('m-camaraderie')">
+        <div class="card-category hci">🎨 Human-Centered Design</div>
+        <div class="rc-accent blush"></div>
+        <div class="rc-icon">💪</div>
+        <h3 class="rc-title">Camaraderie</h3>
+        <p class="rc-desc">Fitness app with AI posture detection, gamified points, a trainer/user messaging system, and post-workout journaling.</p>
+        <div class="rc-tags"><span class="rc-tag">HCI</span><span class="rc-tag">Figma</span><span class="rc-tag">CV</span></div>
+        <a href="https://www.figma.com/proto/CJ2J3Z4Z5PTw18w5jU7q3N/EBD---Final-after-feedback?node-id=0-1&t=Hi8T6ke7ENHMv1Gv-1" target="_blank" onclick="event.stopPropagation()" class="card-link-badge">↗ Figma Prototype</a>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+      <div class="project-card secondary reveal reveal-delay-2" onclick="openModal('m-dawgden')">
+        <div class="card-category hack">🏆 UWBHacks 2026</div>
+        <div class="rc-accent sage"></div>
+        <div class="rc-icon">🐾</div>
+        <h3 class="rc-title">DawgDen</h3>
+        <p class="rc-desc">Verified UW student marketplace with item listings, Reddit-style community chat, an ElevenLabs voice assistant, and Gemma 4 for lease analysis. Built at UWBHacks 2026.</p>
+        <div class="rc-tags"><span class="rc-tag">Full Stack</span><span class="rc-tag">ElevenLabs</span><span class="rc-tag">Gemma 4</span><span class="rc-tag">Hackathon</span></div>
+        <a href="https://dawg-den.vercel.app/" target="_blank" onclick="event.stopPropagation()" class="card-link-badge">↗ Live Site</a>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+      <div class="project-card secondary reveal reveal-delay-3" onclick="openModal('m-quantum')">
+        <div class="card-category hack">🥉 UW-IBM Quantum Hackathon</div>
+        <div class="rc-accent yellow"></div>
+        <div class="rc-icon">⚛️</div>
+        <h3 class="rc-title">Quantum ML: CAR T-Cell Prediction</h3>
+        <p class="rc-desc">Awarded 3rd place in the UW-IBM Quantum Machine Learning Hackathon for investigating when quantum data encoding outperforms classical ML on CAR T-cell cytotoxicity prediction using IBM Heron R2 hardware.</p>
+        <div class="rc-tags"><span class="rc-tag">Qiskit</span><span class="rc-tag">Quantum ML</span><span class="rc-tag">IBM QPU</span><span class="rc-tag">SVM</span></div>
+        <span class="card-hint">Click to expand ↗</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project modals -->
+<div class="modal-overlay" id="m-empathy" onclick="overlayClose(event,'m-empathy')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-empathy')">✕</button>
+    <div class="modal-accent blush"></div>
+    <div class="modal-icon">🧠</div>
+    <div class="modal-title">LLM Empathy Evaluation</div>
+    <div class="modal-context">iCare / DAIS Lab · UW Bothell · 2025-Present</div>
+    <p class="modal-desc">Built an end-to-end framework to evaluate and monitor LLM performance on mental health conversation summarization, with a focus on empathy quality and clinical safety.</p>
+    <ul class="modal-bullets">
+      <li>Fine-tuned <strong>Meta LLaMA</strong> on annotated therapeutic dialogue datasets to score summaries on empathy dimensions</li>
+      <li>Developed a <strong>monitoring pipeline</strong> to surface model regressions across evaluation batches and flag low-quality outputs</li>
+      <li>Defined rubric-based evaluation metrics aligned with clinical standards for mental health conversation quality</li>
+      <li>Integrated results into a reporting dashboard for lab review and iterative model improvement</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Meta LLaMA</span><span class="modal-stack-pill">Hugging Face</span><span class="modal-stack-pill">PyTorch</span><span class="modal-stack-pill">PEFT / LoRA</span><span class="modal-stack-pill">LLM Evaluation</span><span class="modal-stack-pill">Clinical NLP</span><span class="modal-stack-pill">Python</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-icare" onclick="overlayClose(event,'m-icare')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-icare')">✕</button>
+    <div class="modal-accent sage"></div>
+    <div class="modal-icon">💬</div>
+    <div class="modal-title">iCare Adaptive Chatbot</div>
+    <div class="modal-context">iCare / DAIS Lab · UW Bothell · 2025-Present</div>
+    <p class="modal-desc">Designed a personality-adaptive chatbot framework that adjusts its conversational persona in real time based on detected user emotions, making mental health AI more personalized and responsive. Currently being extended with a RAG pipeline that grounds responses in knowledge retrieved from DEC-clustered user coping profiles.</p>
+    <ul class="modal-bullets">
+      <li>Engineered a <strong>real-time emotion classification</strong> module using Sentence-BERT embeddings to detect user affect from conversation context</li>
+      <li>Built a <strong>dynamic persona switching</strong> system that routes LLM prompts through different personality templates based on emotion state</li>
+      <li>Evaluated chatbot responses across empathy and engagement metrics using both automated scoring and human review</li>
+      <li>Designed the system to be model-agnostic, supporting plug-in of different backbone LLMs</li>
+      <li>Extending with a <strong>RAG pipeline</strong> that retrieves relevant therapeutic context from a vector store indexed by DEC-derived coping clusters, grounding LLM responses in user-specific behavioral patterns rather than generic prompts</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Sentence-BERT</span><span class="modal-stack-pill">PyTorch</span><span class="modal-stack-pill">Hugging Face</span><span class="modal-stack-pill">RAG</span><span class="modal-stack-pill">Vector Store</span><span class="modal-stack-pill">Prompt Engineering</span><span class="modal-stack-pill">Emotion Detection</span><span class="modal-stack-pill">Python</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-dec" onclick="overlayClose(event,'m-dec')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-dec')">✕</button>
+    <div class="modal-accent yellow"></div>
+    <div class="modal-icon">🔬</div>
+    <div class="modal-title">Deep Embedded Clustering</div>
+    <div class="modal-context">iCare / DAIS Lab · UW Bothell · 2025-Present</div>
+    <p class="modal-desc">Applied unsupervised deep learning to cluster user coping strategies from therapy conversations, enabling more targeted therapeutic AI interactions without requiring labeled training data.</p>
+    <ul class="modal-bullets">
+      <li>Implemented <strong>Deep Embedded Clustering (DEC)</strong> to learn latent representations of user coping behavior from raw conversation text</li>
+      <li>Decoupled coping mechanism signals from surface-level generative text, reducing noise in downstream LLM conditioning</li>
+      <li>Validated clusters against qualitative clinical frameworks to ensure interpretability and clinical relevance</li>
+      <li>Used cluster assignments to <strong>personalize therapeutic interaction styles</strong> in the iCare chatbot pipeline</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">DEC</span><span class="modal-stack-pill">PyTorch</span><span class="modal-stack-pill">Unsupervised ML</span><span class="modal-stack-pill">Text Embeddings</span><span class="modal-stack-pill">Generative AI</span><span class="modal-stack-pill">Python</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-camaraderie" onclick="overlayClose(event,'m-camaraderie')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-camaraderie')">✕</button>
+    <div class="modal-accent blush"></div>
+    <div class="modal-icon">💪</div>
+    <div class="modal-title">Camaraderie</div>
+    <div class="modal-context">Human-Centered Design · UW Bothell · 2025-2026</div>
+    <a href="https://www.figma.com/proto/CJ2J3Z4Z5PTw18w5jU7q3N/EBD---Final-after-feedback?node-id=0-1&t=Hi8T6ke7ENHMv1Gv-1" target="_blank" class="modal-ext-link">↗ View Figma Prototype</a>
+    <p class="modal-desc">A fitness app designed to increase workout consistency through reflection, community, and real-time AI feedback. Motivated by research showing people work out more when they reflect immediately after a session.</p>
+    <ul class="modal-bullets">
+      <li><strong>AI posture detection</strong> via device camera that gives users real-time form feedback and awards points for correct technique</li>
+      <li><strong>Post-workout journaling</strong> prompt that appears right after a session, capitalizing on the reflection-consistency link from fitness research</li>
+      <li>Trainer/user messaging system enabling personalized coaching and accountability within the app</li>
+      <li>Gamified points system to encourage consistency and make fitness progress feel tangible and rewarding</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack & Methods</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Figma</span><span class="modal-stack-pill">Human-Centered Design</span><span class="modal-stack-pill">Computer Vision</span><span class="modal-stack-pill">Pose Estimation</span><span class="modal-stack-pill">UX Research</span><span class="modal-stack-pill">Prototyping</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-dawgden" onclick="overlayClose(event,'m-dawgden')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-dawgden')">✕</button>
+    <div class="modal-accent sage"></div>
+    <div class="modal-icon">🐾</div>
+    <div class="modal-title">DawgDen</div>
+    <div class="modal-context">UWBHacks 2026 · Hackathon Project</div>
+    <a href="https://dawg-den.vercel.app/" target="_blank" class="modal-ext-link">↗ Visit Live Site</a>
+    <p class="modal-desc">A verified marketplace and community platform built exclusively for UW students. Think Craigslist meets Reddit, but with UW NetID authentication, an AI voice assistant, and LLM-powered lease analysis built right in.</p>
+    <ul class="modal-bullets">
+      <li><strong>Verified listings</strong>: only UW-authenticated students can post items for sale, which eliminates the scam risk common on general platforms</li>
+      <li><strong>ElevenLabs voice assistant</strong>: students can navigate listings, ask questions, and interact with the platform hands-free via a conversational voice interface</li>
+      <li><strong>Gemma 4 lease analyzer</strong>: paste or upload a lease document and Gemma 4 summarizes key terms, flags red flags, and distills community comments on similar leases</li>
+      <li><strong>Reddit-style community chat</strong> with topic filters for housing, textbooks, electronics, and campus life</li>
+      <li>Built and shipped end-to-end during <strong>UWBHacks 2026</strong>, from idea to deployed product in under 24 hours</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Next.js</span><span class="modal-stack-pill">Vercel</span><span class="modal-stack-pill">ElevenLabs</span><span class="modal-stack-pill">Gemma 4</span><span class="modal-stack-pill">UW Auth</span><span class="modal-stack-pill">Full Stack</span><span class="modal-stack-pill">LLM</span>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="m-quantum" onclick="overlayClose(event,'m-quantum')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('m-quantum')">✕</button>
+    <div class="modal-accent yellow"></div>
+    <div class="modal-icon">⚛️</div>
+    <div class="modal-title">Quantum ML: CAR T-Cell Prediction</div>
+    <div class="modal-context">🥉 3rd Place · UW-IBM Quantum Machine Learning Hackathon · May 2026</div>
+    <p class="modal-desc">Investigated whether quantum data encoding genuinely outperforms classical ML on a real biomedical problem, CAR T-cell cytotoxicity prediction, using IBM's Heron R2 quantum hardware. Uncovered a dimensionality paradox with implications for near-term quantum advantage claims.</p>
+    <ul class="modal-bullets">
+      <li>Discovered a <strong>dimensionality paradox</strong>: quantum projected kernels (180-dim) underperform classical SVM at small training sizes despite theoretical predictions of the opposite</li>
+      <li>Ran <strong>live QPU kernel computation</strong> using Qiskit Runtime EstimatorV2 + Batch on IBM Heron R2 hardware (172-sample binary classification)</li>
+      <li>Validated findings via <strong>paired permutation tests</strong>, learning curve analysis, noise robustness sweeps, and position-shuffling ablations across 4 tracks</li>
+      <li>Results contribute to the real-world understanding of quantum advantage boundaries in small-data, high-dimensional biomedical settings</li>
+    </ul>
+    <div class="modal-stack-title">Tech Stack</div>
+    <div class="modal-stack">
+      <span class="modal-stack-pill">Qiskit</span><span class="modal-stack-pill">IBM Heron R2</span><span class="modal-stack-pill">Quantum Kernels</span><span class="modal-stack-pill">Classical SVM</span><span class="modal-stack-pill">Permutation Tests</span><span class="modal-stack-pill">Python</span><span class="modal-stack-pill">Quantum ML</span>
+    </div>
+  </div>
+</div>
+
+<section id="experience">
+  <div class="section-wrap">
+    <p class="section-label reveal">Industry</p>
+    <h2 class="section-title reveal reveal-delay-1">Work Experience</h2>
+    <div class="exp-timeline">
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Jun 2023 – Aug 2025</div>
+          <div class="exp-badge badge-nationwide">Nationwide</div>
+        </div>
+        <div>
+          <div class="exp-role">Data Engineer</div>
+          <div class="exp-company">Nationwide · Phoenix, AZ (Remote)</div>
+          <p style="font-size:.9rem;line-height:1.6;color:var(--ink-soft);font-weight:300;margin-bottom:.8rem;">Led the migration of legacy data pipelines to a modern Databricks architecture and coordinated a 24-member global engineering team.</p>
+          <ul class="exp-bullets">
+            <li>Migrated <span class="exp-highlight">12 AWS Glue PySpark jobs</span> to Databricks, cutting batch runtime from 8 hours to 2</li>
+            <li>Optimized 150+ Kubernetes and Docker batch jobs, reducing failure tickets from <span class="exp-highlight">1,000+ to &lt;10/month</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">May 2022 – Jun 2023</div>
+          <div class="exp-badge badge-linkedin">LinkedIn</div>
+        </div>
+        <div>
+          <div class="exp-role">Full Stack Developer</div>
+          <div class="exp-company">LinkedIn · Sunnyvale, CA (Remote)</div>
+          <p style="font-size:.9rem;line-height:1.6;color:var(--ink-soft);font-weight:300;margin-bottom:.8rem;">Drove critical backend modernization for the HireIn platform, upgrading legacy systems and resolving key security vulnerabilities.</p>
+          <ul class="exp-bullets">
+            <li>Upgraded core backend from <span class="exp-highlight">Python 3.7 to 3.10</span>, resolving critical CVEs for millions of recruiters</li>
+            <li>Trimmed high-traffic page load from <span class="exp-highlight">~4s to ~3s</span> by overhauling JavaScript queries and frontend logic</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Feb 2021 – May 2022</div>
+          <div class="exp-badge badge-jpmorgan">JPMorgan</div>
+        </div>
+        <div>
+          <div class="exp-role">Python Developer</div>
+          <div class="exp-company">JPMorgan Chase & Co. · Houston, TX</div>
+          <p style="font-size:.9rem;line-height:1.6;color:var(--ink-soft);font-weight:300;margin-bottom:.8rem;">Architected high-speed data pipelines and Python APIs to accelerate quantitative analysis and trading decisions.</p>
+          <ul class="exp-bullets">
+            <li>Automated data quality reporting across <span class="exp-highlight">500,000+ records</span>, surfacing datasets an hour earlier per run</li>
+            <li>Optimized Python and SQL workflows, <span class="exp-highlight">shaving 30+ minutes per run</span> across time-sensitive analyst datasets</li>
+          </ul>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-meta">
+          <div class="exp-year">Jun 2019 – Dec 2020</div>
+          <div class="exp-badge badge-msu">NSPARC</div>
+        </div>
+        <div>
+          <div class="exp-role">Computer Specialist & Student Worker</div>
+          <div class="exp-company">NSPARC, Mississippi State University · Starkville, MS</div>
+          <p style="font-size:.9rem;line-height:1.6;color:var(--ink-soft);font-weight:300;">Provided hands-on technical support, maintained campus IT infrastructure, and assisted with day-to-day administrative tasks for the research center.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="section-wrap">
+    <div class="edu-grid">
+      <div>
+        <p class="section-label reveal">Education</p>
+        <h2 class="section-title reveal reveal-delay-1">Education</h2>
+        <p style="font-size:1rem;line-height:1.8;color:var(--ink-soft);font-weight:300;max-width:340px;" class="reveal reveal-delay-2">From Mississippi State to UW Bothell, building the theoretical foundation to complement years of engineering practice.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:1.4rem;">
+        <div class="edu-card uw reveal">
+          <div class="edu-degree">M.S. Computer Science & Software Engineering</div>
+          <div class="edu-school">University of Washington, Bothell</div>
+          <div class="edu-year">Sep 2025 – Present</div>
+          <div class="edu-gpa">GPA: 3.98</div>
+          <ul class="edu-research">
+            <li>Fine-tuning LLaMA for empathy evaluation in therapeutic AI (iCare/DAIS Lab, Dr. Dong Si)</li>
+            <li>Personality-adaptive chatbot with real-time emotion classification via Sentence-BERT</li>
+            <li>Unsupervised Deep Embedded Clustering for coping mechanism detection</li>
+          </ul>
+        </div>
+        <div class="edu-card msu reveal reveal-delay-1">
+          <div class="edu-degree">B.S. Computer Science</div>
+          <div class="edu-school">Mississippi State University</div>
+          <div class="edu-year">Aug 2016 – May 2020</div>
+          <ul class="edu-research">
+            <li><strong>NSPARC Computer Specialist & Student Worker:</strong> Provided hands-on technical support and maintained campus IT infrastructure.</li>
+            <li><strong>Resident Advisor:</strong> Fostered a supportive, inclusive community environment and developed strong leadership and conflict-resolution skills.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outside">
+  <div class="section-wrap">
+    <p class="section-label reveal">Life Outside Work</p>
+    <h2 class="section-title reveal reveal-delay-1">Beyond Work</h2>
+    <p class="outside-intro reveal reveal-delay-2">When I'm not training models or building pipelines, I love to travel, hike, and explore trails across the country.</p>
+    <div class="outside-grid">
+      <div class="outside-card reveal">
+        <img src="output_files/photo_hike.jpg" alt="Trail sign at Rocky Mountain National Park, Colorado" class="outside-photo" style="height:360px;object-fit:cover;object-position:center;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🏔 Rocky Mountain National Park, Colorado</div>
+          <div class="outside-caption-text">Nymph Lake, Dream Lake, Emerald Lake, Lake Haiyaha. My favorite hike.</div>
+        </div>
+      </div>
+      <div class="hike-info-card reveal reveal-delay-1">
+        <div class="hike-icon">🥾</div>
+        <div class="hike-title">I love to hike!</div>
+        <p class="hike-desc">My favorite hike was in Rocky Mountain National Park, Colorado, starting at Nymph Lake and pushing all the way up to Lake Haiyaha.<br><br>Whether it's Pacific Northwest forests, desert canyons, or alpine lakes, I'm happiest when I'm exploring new places.</p>
+      </div>
+      <div class="outside-card reveal">
+        <img src="output_files/photo_horseshoe.jpg" alt="Horseshoe Bend, Arizona" class="outside-photo" style="height:320px;object-fit:cover;object-position:center 30%;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🪨 Page, Arizona</div>
+          <div class="outside-caption-text">Horseshoe Bend</div>
+        </div>
+      </div>
+      <div class="outside-card reveal reveal-delay-1">
+        <img src="output_files/photo_raft.jpg" alt="River rafting at Great Smoky Mountains National Park" class="outside-photo" style="height:320px;object-fit:cover;" />
+        <div class="outside-caption">
+          <div class="outside-caption-loc">🌊 Great Smoky Mountains National Park</div>
+          <div class="outside-caption-text">River rafting, full send</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact-inner">
+    <p class="section-label reveal" style="text-align:center;color:var(--ink-soft);">Let's Get in Touch</p>
+    <h2 class="contact-headline reveal reveal-delay-1">Contact <em>Me</em></h2>
+    <p class="contact-sub reveal reveal-delay-2">I'm always open to collaborations and new opportunities. Feel free to reach out!</p>
+    <div class="contact-links reveal reveal-delay-3">
+      <a href="https://linkedin.com/in/priyamusale" target="_blank" class="btn btn-outline">LinkedIn →</a>
+      <a href="https://github.com/priyamusale" target="_blank" class="btn btn-outline">GitHub →</a>
+      <button onclick="openResume()" class="btn btn-outline">↗ View Resume</button>
+    </div>
+  </div>
+</section>
+
+<!-- Resume preview modal -->
+<div class="resume-overlay" id="resume-modal" onclick="resumeOverlayClose(event)">
+  <div class="resume-box">
+    <div class="resume-header">
+      <span>Priya Musale | Resume</span>
+      <div class="resume-actions">
+        <a href="output_files/PriyaMusale_Resume.pdf" download class="btn btn-primary" style="padding:.5rem 1.1rem;font-size:.7rem;">↓ Download</a>
+        <button class="icon-btn" onclick="closeResume()">✕</button>
+      </div>
+    </div>
+    <div class="resume-body">
+      <iframe src="output_files/PriyaMusale_Resume.pdf" title="Priya Musale Resume"></iframe>
+    </div>
+  </div>
+</div>
+
+<footer>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Project modals
+  function openModal(id){ document.getElementById(id).classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeModal(id){ document.getElementById(id).classList.remove('open'); document.body.style.overflow=''; }
+  function overlayClose(e,id){ if(e.target===document.getElementById(id)) closeModal(id); }
+
+  // Resume modal
+  function openResume(){ document.getElementById('resume-modal').classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeResume(){ document.getElementById('resume-modal').classList.remove('open'); document.body.style.overflow=''; }
+  function resumeOverlayClose(e){ if(e.target===document.getElementById('resume-modal')) closeResume(); }
+
+  // Escape key closes all
+  document.addEventListener('keydown', e => {
+    if(e.key==='Escape'){
+      ['m-empathy','m-icare','m-dec','m-camaraderie','m-dawgden','m-quantum'].forEach(closeModal);
+      closeResume();
+    }
+  });
+</script>
+</body>
+</html>
